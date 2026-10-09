@@ -1,6 +1,13 @@
 #Orb{
-    width: 100px;
-    height: 100px;
+    width: 60px;
+    height: 60px;
     background-color: #007bff;
     border-radius: 50%;
+    position: float;
+    top: 20px;
+    left: 20px;
+    user-select: none;
+    -webkit-user-drag: none;
+    cursor:grab;
+    touch-action: none;
 }
