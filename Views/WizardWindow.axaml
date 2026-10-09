@@ -1,0 +1,77 @@
+<Window
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    x:Class="OnyxSpeedrun.Views.WizardWindow"
+    xmlns:abstractions="using:Microsoft.TemplateEngine.Abstractions"
+    xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+    Title="SpeedRun"
+    Width="900"
+    Height="600"
+    MinWidth="700"
+    MinHeight="450">
+
+    <Grid>
+        <StackPanel
+            x:Name="welcomePageView"
+            IsVisible="True">
+        <!-- Welcome message -->
+        <Label
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Margin="0,30,0,0"
+            FontSize="28"
+            FontWeight="Bold">
+            WHAT ARE WE DOING TODAY?
+        </Label>
+
+        <!-- Buttons -->
+        <StackPanel
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Spacing="16">
+
+            <Button HorizontalAlignment="Center"
+                    x:Name="newProjectBtn"
+                    Click="NewProjectBtn_OnClick_">
+                CREATE A NEW PROJECT
+            </Button>
+
+            <Label
+                HorizontalAlignment="Center">
+                OR
+            </Label>
+
+            <Button HorizontalAlignment="Center">
+                OPEN AN EXISTING PROJECT
+            </Button>
+
+         </StackPanel>
+        </StackPanel>
+        
+        <StackPanel x:Name="newProjectView"
+                    IsVisible="False"
+                    HorizontalAlignment="Center"
+                    Spacing="10">
+            <Label HorizontalAlignment="Center"
+                   VerticalAlignment="Top"
+                   Margin="0,30,0,0"
+                   FontSize="28"
+                   FontWeight="Bold">CREATING A NEW PROJECT?</Label>
+            
+            <Label>SOLUTION NAME:</Label> <TextBox Width="300"></TextBox>
+            <Label>LOCATION:</Label> <TextBox Width="300"></TextBox> <Button><materialIcons:MaterialIcon Kind="FolderOpen" /></Button>
+            
+            <Label>TEMPLATE:</Label>
+
+            <AutoCompleteBox
+                PlaceholderText="template"
+                x:Name="templateSearchBox"
+                Width="300"></AutoCompleteBox>
+            
+            <Button>CREATE</Button>
+            <Button
+                Click="backBtnNpv">BACK</Button>
+        </StackPanel>
+    </Grid>
+
+</Window>
