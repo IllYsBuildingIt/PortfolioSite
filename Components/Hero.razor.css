@@ -1,0 +1,7 @@
+.heroClass{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 2px #0a53be solid;
+}
