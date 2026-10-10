@@ -3,7 +3,7 @@
     height: 60px;
     background-color: #007bff;
     border-radius: 50%;
-    position: float;
+    position: fixed;
     top: 20px;
     left: 20px;
     user-select: none;

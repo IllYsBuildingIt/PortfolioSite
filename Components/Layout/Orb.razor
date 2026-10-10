@@ -1,1 +1,28 @@
-﻿<div id="Orb"></div>
+﻿<div id="Orb" 
+@onpointerdown="Pdown" 
+@onpointerup="Pup" 
+@onpointermove="Pmove">
+</div>
+
+@code{
+    public int x = 20;
+    public int y = 20;
+
+    private double OndragX;
+    private double OndragY;
+
+    void Pdown(PointerEventArgs e)
+    {
+        OndragX = Convert.ToDouble(e.ClientX);
+        OndragY = Convert.ToDouble(e.ClientY);
+    }
+
+    void Pup(PointerEventArgs e)
+    {
+        OndragX = Convert.ToDouble(e.ClientX);
+        OndragY = Convert.ToDouble(e.ClientY);
+    }
+
+    //pmove can't be void because it needs to return a value, so I will make it return a string
+
+}
