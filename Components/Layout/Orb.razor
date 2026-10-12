@@ -1,28 +1,63 @@
-﻿<div id="Orb" 
-@onpointerdown="Pdown" 
-@onpointerup="Pup" 
-@onpointermove="Pmove">
+﻿<div id="Orb"style="position: absolute; left: 20px; top: 20px; touch-action: none; user-select: none; cursor: grab;"
+@onpointerdown="Pdown"
+@onpointerup="Pup"
+@onpointermove="Pmove"
+@onpointerleave="Pleave">
 </div>
 
-@code{
-    public int x = 20;
-    public int y = 20;
+@code {
+     double x;
+     double y;
+     double StartingFromX;
+     double StartingFromY;
+     double TravellingX;
+     double TravellingY;
+     double TravelledTox;
+     double TravelledToy;
+     bool isPenDown = false;
+     void Pdown(PointerEventArgs e)
+     {
+          isPenDown = true;
+          StartingFromX = e.ClientX;
+          StartingFromY = e.ClientY;
+          Console.WriteLine($"Pointer down at: {StartingFromX}, {StartingFromY}");
+     }
 
-    private double OndragX;
-    private double OndragY;
+     void Pmove(PointerEventArgs e)
+     {
+          if (isPenDown == true)
+          {
+               TravellingX = e.ClientX;
+               TravellingY = e.ClientY;
+               Console.WriteLine($"Pointer moved to: {TravellingX}, {TravellingY}");
+          }
+     }
 
-    void Pdown(PointerEventArgs e)
-    {
-        OndragX = Convert.ToDouble(e.ClientX);
-        OndragY = Convert.ToDouble(e.ClientY);
-    }
+     void Pup(PointerEventArgs e)
+     {
+          isPenDown = false;
+          TravelledTox = e.ClientX;
+          TravelledToy = e.ClientY;
+          Console.WriteLine($"Pointer released at: {TravelledTox}, {TravelledToy}");
+     }
 
-    void Pup(PointerEventArgs e)
-    {
-        OndragX = Convert.ToDouble(e.ClientX);
-        OndragY = Convert.ToDouble(e.ClientY);
-    }
+     void Pleave(PointerEventArgs e)
+     {
+          if (isPenDown == true)
+          {
+               isPenDown = false;
+               TravelledTox = e.ClientX;
+               TravelledToy = e.ClientY;
+               Console.WriteLine($"Pointer moved to: {TravelledTox}, {TravelledToy}");
+          }
 
-    //pmove can't be void because it needs to return a value, so I will make it return a string
+
+     }
+
+     void Direction()
+     {
+          
+     }
+
 
 }

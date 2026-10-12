@@ -4,8 +4,6 @@
     background-color: #007bff;
     border-radius: 50%;
     position: fixed;
-    top: 20px;
-    left: 20px;
     user-select: none;
     -webkit-user-drag: none;
     cursor:grab;
