@@ -1,4 +1,12 @@
-﻿<div id="Orb"style="position: absolute; left: 20px; top: 20px; touch-action: none; user-select: none; cursor: grab;"
+﻿<div id="Orb"style="position: absolute;
+     left: @(leftSpacing)px;
+     top: @(topSpacing)px;
+     touch-action: none; 
+     user-select: none; 
+     cursor: grab;
+     --border-radius: @(borderRadius)%;
+     --final-orbwidth: @(orbwidth)vh;
+     --final-orbheight: @(orbheight)vh;"
 @onpointerdown="Pdown"
 @onpointerup="Pup"
 @onpointermove="Pmove"
@@ -6,58 +14,93 @@
 </div>
 
 @code {
-     double x;
-     double y;
-     double StartingFromX;
-     double StartingFromY;
-     double TravellingX;
-     double TravellingY;
-     double TravelledTox;
-     double TravelledToy;
-     bool isPenDown = false;
-     void Pdown(PointerEventArgs e)
-     {
-          isPenDown = true;
-          StartingFromX = e.ClientX;
-          StartingFromY = e.ClientY;
-          Console.WriteLine($"Pointer down at: {StartingFromX}, {StartingFromY}");
-     }
-
-     void Pmove(PointerEventArgs e)
-     {
-          if (isPenDown == true)
+          double x;
+          double y;
+          double StartingFromX;
+          double StartingFromY;
+          double TravellingX;
+          double TravellingY;
+          double TravelledTox;
+          double TravelledToy;
+          bool isPenDown = false;
+          int orbState;
+          int orbwidth = 10;
+          int orbheight = 10;
+          int borderRadius = 50;
+          int leftSpacing = 20;
+          int topSpacing = 20;
+          
+          void Pdown(PointerEventArgs e)
           {
-               TravellingX = e.ClientX;
-               TravellingY = e.ClientY;
-               Console.WriteLine($"Pointer moved to: {TravellingX}, {TravellingY}");
+               isPenDown = true;
+               StartingFromX = e.ClientX;
+               StartingFromY = e.ClientY;
+               Console.WriteLine($"Pointer down at: {StartingFromX}, {StartingFromY}");
           }
-     }
 
-     void Pup(PointerEventArgs e)
-     {
-          isPenDown = false;
-          TravelledTox = e.ClientX;
-          TravelledToy = e.ClientY;
-          Console.WriteLine($"Pointer released at: {TravelledTox}, {TravelledToy}");
-     }
+          void Pmove(PointerEventArgs e)
+          {
+               if (isPenDown == true)
+               {
+                    TravellingX = e.ClientX;
+                    TravellingY = e.ClientY;
+                    Console.WriteLine($"Pointer moved to: {TravellingX}, {TravellingY}");
+               }
+          }
 
-     void Pleave(PointerEventArgs e)
-     {
-          if (isPenDown == true)
+          void Pup(PointerEventArgs e)
           {
                isPenDown = false;
                TravelledTox = e.ClientX;
                TravelledToy = e.ClientY;
-               Console.WriteLine($"Pointer moved to: {TravelledTox}, {TravelledToy}");
+               Console.WriteLine($"Pointer released at: {TravelledTox}, {TravelledToy}");
+               Direction();
           }
 
+          void Pleave(PointerEventArgs e)
+          {
+               if (isPenDown == true)
+               {
+                    isPenDown = false;
+                    TravelledTox = e.ClientX;
+                    TravelledToy = e.ClientY;
+                    Console.WriteLine($"Pointer released at: {TravelledTox}, {TravelledToy}");
+                    Direction();
+               }
 
-     }
 
-     void Direction()
-     {
+          }
+
+          void Direction()
+          {
+               double absX = Math.Abs(TravelledTox - StartingFromX);
+               double absY = Math.Abs(TravelledToy - StartingFromY);
+               if (absX > absY)
+               {
+                    Console.WriteLine("Horizontal movement");
+                    orbState = 1;
+                    orbwidth = 27;
+                    orbheight = 7;
+                    borderRadius = 0;
+                    leftSpacing = 0;
+
+               }
+               else if (absY > absX)
+               {
+                    Console.WriteLine("Vertical movement");
+                    orbState = 2;
+                    orbheight = 100;
+                    borderRadius = 0;
+                    leftSpacing = 0;
+                    topSpacing = 0;
+               }
+               else
+               {
+                    Console.WriteLine("Clicked");
+                    orbState = 0;
+               }
+          }
+
           
-     }
-
 
 }

@@ -1,8 +1,8 @@
 #Orb{
-    width: 60px;
-    height: 60px;
+    width: var(--final-orbwidth);
+    height: var(--final-orbheight);
     background-color: #007bff;
-    border-radius: 50%;
+    border-radius: var(--border-radius);
     position: fixed;
     user-select: none;
     -webkit-user-drag: none;
