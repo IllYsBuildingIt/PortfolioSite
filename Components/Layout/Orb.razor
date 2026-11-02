@@ -1,12 +1,25 @@
-﻿<div id="Orb"style="position: absolute;
-     left: @(leftSpacing)px;
-     top: @(topSpacing)px;
-     touch-action: none; 
-     user-select: none; 
-     cursor: grab;
-     --border-radius: @(borderRadius)%;
-     --final-orbwidth: @(orbwidth)vh;
-     --final-orbheight: @(orbheight)vh;"
+﻿<div id="Orb"
+     style="
+          background-color: #007bff;
+          position: fixed;
+          user-select: none;
+          -webkit-user-drag: none;
+          cursor:grab;
+          touch-action: none;
+          display: flex;
+          justify-content: var(--justify-content);
+          left: @(leftSpacing)%;
+          top: @(topSpacing)%;
+          transform: translateX(var(--translatexvalue));
+          width: var(--final-orbwidth);
+          height: var(--final-orbheight);
+          border-radius: var(--border-radius);
+          --border-radius: @(borderRadius)%;
+          --final-orbwidth: @(orbwidth)vh;
+          --final-orbheight: @(orbheight)vh;
+          --justify-content: @(justifyContent);
+          --translatexvalue: @(translatexvalue)%"
+     
 @onpointerdown="Pdown"
 @onpointerup="Pup"
 @onpointermove="Pmove"
@@ -25,8 +38,10 @@
           int orbwidth = 10;
           int orbheight = 10;
           int borderRadius = 50;
-          int leftSpacing = 20;
-          int topSpacing = 20;
+          int leftSpacing = 4;
+          int topSpacing = 2;
+          string justifyContent = "left";
+          int translatexvalue = -50;
           
           void Pdown(PointerEventArgs e)
           {
@@ -77,20 +92,23 @@
                {
                     Console.WriteLine("Horizontal movement");
                     orbState = 1;
-                    orbwidth = 27;
+                    orbwidth = 30;
                     orbheight = 7;
                     borderRadius = 0;
-                    leftSpacing = 0;
-
+                    leftSpacing = 50;
+                    justifyContent = "center";
+                    translatexvalue = -50;
                }
                else if (absY > absX)
                {
                     Console.WriteLine("Vertical movement");
                     orbState = 2;
                     orbheight = 100;
+                    orbwidth = 10;
                     borderRadius = 0;
                     leftSpacing = 0;
                     topSpacing = 0;
+                    translatexvalue = 0;
                }
                else
                {
