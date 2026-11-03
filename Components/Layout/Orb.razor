@@ -19,11 +19,20 @@
           --final-orbheight: @(orbheight)vh;
           --justify-content: @(justifyContent);
           --translatexvalue: @(translatexvalue)%"
+
+     @onpointerdown="Pdown"
+     @onpointerup="Pup"
+     @onpointermove="Pmove"
+     @onpointerleave="Pleave">
      
-@onpointerdown="Pdown"
-@onpointerup="Pup"
-@onpointermove="Pmove"
-@onpointerleave="Pleave">
+     @if (orbState != 0)
+     {
+          <section id="navlinks">
+               <a href="/Skills">Skills</a>
+               <a href="/Projects">Projects</a>
+               <a href="/Contact">Contact</a>
+          </section>
+     }
 </div>
 
 @code {
@@ -34,7 +43,7 @@
           double TravelledTox;
           double TravelledToy;
           bool isPenDown = false;
-          int orbState;
+          int orbState = 0;
           int orbwidth = 10;
           int orbheight = 10;
           int borderRadius = 50;
@@ -120,3 +129,7 @@
           
 
 }
+
+
+
+
